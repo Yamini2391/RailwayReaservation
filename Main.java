@@ -23,7 +23,7 @@ public class Main {
 			case 1: do{
 				System.out.println("Enter the security key");
 			
-					//sc.nextLine();
+					
 				    securityKey=sc.nextLine();
 				    if(securityKey.equals("admin123")) {
 				    System.out.println("Welcome, Admin!");
@@ -31,7 +31,7 @@ public class Main {
 				    }else {
 				    	System.out.println("Enter correct security key to access admin");
 				    }
-			}while(!securityKey.equals("admin123"));
+			}while(!securityKey.equals("ADMIN123"));
 					break;
 			case 2: 
 					System.out.println("Do you want to create new account or login into your existing account");
