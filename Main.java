@@ -1,9 +1,8 @@
 package railwayReservation;
 import java.util.*;
-public class Main {
 
-	public static void main(String[] args) {
-		
+public class Main {
+	public static void main(String args[]) {
 		Scanner sc=new Scanner(System.in);
 		System.out.println("Welcome to Indian Railways");
 		Admin a=new Admin();
@@ -26,13 +25,13 @@ public class Main {
 			
 					//sc.nextLine();
 				    securityKey=sc.nextLine();
-				    if(securityKey.equals(a.key)) {
-					a.displayMenu();
-					
+				    if(securityKey.equals("admin123")) {
+				    System.out.println("Welcome, Admin!");
+					a.displayAdminMenu();
 				    }else {
-				    	System.out.println("Enter correct secutity key to access admin");
+				    	System.out.println("Enter correct security key to access admin");
 				    }
-			}while(!securityKey.equals(a.key));
+			}while(!securityKey.equals("admin123"));
 					break;
 			case 2: 
 					System.out.println("Do you want to create new account or login into your existing account");
@@ -56,8 +55,11 @@ public class Main {
 			default: System.out.println("Invalid choice");
 			}
 			
-		}while(choice!=3);
+		}while(choice!=4);
 	}
 
+
+
+	
 }
 

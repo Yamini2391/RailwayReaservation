@@ -1,8 +1,13 @@
 package railwayReservation;
 import java.util.*;
+
 public class Accounts {
-	LinkedList<User> userList = new LinkedList<>();
-	Scanner sc = new Scanner(System.in);
+	LinkedList<User>userList=new LinkedList<>();
+	Accounts(){
+		
+	}
+	Scanner sc=new Scanner(System.in);
+	
 	void createAccount() {
 		System.out.println("Enter the username you want to use for your account");
 		String userName = sc.nextLine();
@@ -12,7 +17,7 @@ public class Accounts {
 		userList.add(u);
 		u.userMenu();
 	}
-	
+
 	public void login() {
 		int flag=0;
 		do{

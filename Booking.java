@@ -7,5 +7,4 @@ public class Booking {
 		this.trainNo = trainNo;
 		this.bookingID = bookingID;
 	}
-
 }

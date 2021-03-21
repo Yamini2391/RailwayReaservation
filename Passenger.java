@@ -12,5 +12,5 @@ public class Passenger {
 		this.gender=gender;
 		this.bookingID = bookingID;
 	}
-
 }
+
