@@ -25,13 +25,13 @@ public class Main {
 			
 					
 				    securityKey=sc.nextLine();
-				    if(securityKey.equals("admin123")) {
+				    if(securityKey.equals(a.securityKey)) {
 				    System.out.println("Welcome, Admin!");
 					a.displayAdminMenu();
 				    }else {
 				    	System.out.println("Enter correct security key to access admin");
 				    }
-			}while(!securityKey.equals("ADMIN123"));
+			}while(!securityKey.equals(a.securityKey));
 					break;
 			case 2: 
 					System.out.println("Do you want to create new account or login into your existing account");

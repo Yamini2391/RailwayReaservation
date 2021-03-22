@@ -2,7 +2,7 @@ package railwayReservation;
 import java.util.*;
 public class Admin {
 public static LinkedList<Train> trainList = new LinkedList<>();
-String securityKey;
+String securityKey="admin123";
 
 	void displayAdminMenu() {
 		int choice = 0;
