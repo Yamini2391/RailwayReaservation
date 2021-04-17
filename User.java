@@ -37,14 +37,14 @@ public class User {
 				System.out.println();
 				t1 = t;
 				//break;
-				if(t.maxWait==(t.waiting).size()) {
+				/*if(t.maxWait==(t.waiting).size()) {
 					flag=2;
 					System.out.println("Reservation full. Waiting full.");
-				}
+				}*/
 			}
 		}
 		if(flag==1) {
-			System.out.println("Enter train number which you want to book:");
+			System.out.println("\nEnter train number which you want to book:");
 			int n = sc.nextInt(); sc.nextLine();
 			int i=0;
 			for(i=0;i<(Admin.trainList).size();i++) {
@@ -52,25 +52,84 @@ public class User {
 					break;
 				}
 			}
-			System.out.println("Please enter following details:");
-			System.out.println("Name of passenger:");
-			String name = sc.nextLine();
-			System.out.println("Gender:");
-			String gender = sc.nextLine();
-			System.out.println("Age:");
-			int age = sc.nextInt(); sc.nextLine();
-			Admin.trainList.get(i).bookTicket(name, gender, age);
-			int id = Train.bookingCount;
-			Booking b = new Booking(n, id);
-			bookingList.add(b);
-			//t1.displayTicket(id);
+			if(i==(Admin.trainList).size()) {
+				System.out.println("Invalid train number. Try again.");
+				return;
+			}
+			if(Admin.trainList.get(i).maxSeat-(Admin.trainList.get(i).seatedPassengers).size()==0 && Admin.trainList.get(i).maxWait-(Admin.trainList.get(i).waiting).size()==0) {
+				System.out.println("\nThis train does not have any seats available.");
+				System.out.println("Sorry for the incovenience.");
+				return;
+			}
+			System.out.println("\nEnter Number of tickets you want to book: ");
+			int tickets = sc.nextInt();sc.nextLine();
+			boolean toBook = false;
+			int seats = Admin.trainList.get(i).maxSeat-(Admin.trainList.get(i).seatedPassengers).size();
+			int wait = Admin.trainList.get(i).maxWait-(Admin.trainList.get(i).waiting).size();
+			String choice =null;
+			if(tickets<=seats) {
+				System.out.println("Tickets for "+tickets+" passengers are available.");
+				toBook=true;
+			}
+			else if(tickets<=wait+seats) {
+				if(seats==0) {
+					System.out.println("No confirm tickets in this train are available.All your "+tickets+" will be booked in waiting.\nDo you want to continue? (Y/n)");
+					choice=sc.nextLine();
+				}
+				else {
+					System.out.println("You will get "+seats+" tickets as confirmed and remaining "+(tickets-seats)+"will be added to waiting.\nDo you want to continue? (Y/n)");
+					choice=sc.nextLine();
+				}
+				toBook = choice.equals("Y")||choice.equals("y") ? true:false;
+			}
+			else { //tickets>wait+seats;
+				System.out.println("This train does not have "+tickets+" tickets available.");
+				if(seats==0) {
+					System.out.println("You will get only "+wait+" tickets in waiting.\nDo you want to continue? (Y/n)");
+					choice = sc.nextLine();
+				}
+				else {
+					System.out.println("You will get "+seats+" tickets as confirmed and "+wait+" tickets in waiting.\nDo you want to continue? (Y/n)");
+					choice = sc.nextLine();
+				}
+				toBook = choice.equals("Y")||choice.equals("y") ? true:false;
+				tickets=wait+seats;
+			}
+			if(toBook) {
+				List<Passenger> yourList = new LinkedList<>();
+				System.out.println("\nPlease enter passenger details respectively:");
+				for(int t=0;t<tickets;t++) {
+					System.out.println("\nPassenger #"+(t+1));
+					System.out.println("Name of passenger:");
+					String name = sc.nextLine();
+					System.out.println("Gender:");
+					String gender = sc.nextLine();
+					System.out.println("Age:");
+					int age = sc.nextInt(); sc.nextLine();
+					yourList.add(new Passenger(name,age,gender,0));
+				}
+				System.out.println("\nYour ticket details are as follows:");
+				int t=1;
+				for(Passenger p : yourList) {
+					System.out.println("\nPassenger #"+t);
+					Admin.trainList.get(i).bookTicket(p.passengerName, p.gender, p.age);
+					int id = Train.bookingCount;
+					Booking b = new Booking(n, id);
+					bookingList.add(b);
+					t++;
+				}
+				
+			}
+			else {
+				System.out.println("\nSorry for the incovenience.");
+			}
 		}
 		else if(flag==0) {
-			System.out.println("No trains available. :(");
+			System.out.println("\nNo trains available. :(");
 		}
 	}
 	public void userBook() {
-		System.out.println("Enter source:");
+		System.out.println("\nEnter source:");
 		String source = sc.nextLine();
 		System.out.println("Enter destination:");
 		String destination = sc.nextLine();
@@ -79,7 +138,7 @@ public class User {
 		displayAvailableTrains(source, destination, date);
 	}
 	public void userCancel() {
-		System.out.println("Enter your booking ID");
+		System.out.println("\nEnter your booking ID");
 		int id = sc.nextInt();sc.nextLine();
 		int trainNo = 0;
 		for(Booking b : bookingList) {
@@ -90,7 +149,7 @@ public class User {
 			}
 		}
 		if(trainNo==0) {
-			System.out.println("No such booking found");
+			System.out.println("\nNo such booking found");
 		}
 		for(Train t : Admin.trainList) {
 			if(t.trainNo==trainNo) {
@@ -101,7 +160,7 @@ public class User {
 	}
 	
 	public void userStatus() {
-		System.out.println("Enter your booking ID");
+		System.out.println("\nEnter your booking ID");
 		int id = sc.nextInt();sc.nextLine();
 		int trainNo = 0;
 		for(Booking b : bookingList) {
@@ -111,7 +170,7 @@ public class User {
 			}
 		}
 		if(trainNo==0) {
-			System.out.println("No such booking found. Please enter a valid booking ID.");
+			System.out.println("\nNo such booking found. Please enter a valid booking ID.");
 		}
 		for(Train t : Admin.trainList) {
 			if(t.trainNo==trainNo) {

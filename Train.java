@@ -120,7 +120,7 @@ public class Train {
 		}
 		
 		void displayTicket(int bookingID) {
-			System.out.println("Your Ticket details are as follows:\n");
+			//System.out.println("Your Ticket details are as follows:\n");
 			System.out.println("Train No : "+trainNo);
 			System.out.println("Train Name : "+trainName);
 			for(Seat s : seatedPassengers) {
@@ -135,10 +135,10 @@ public class Train {
 			
 			for(Passenger p : waiting) {
 				if(p.bookingID==bookingID) {
-				System.out.println("Booking ID :"+p.bookingID);
-				System.out.println("Passenger Name :"+p.passengerName);
-				System.out.println("Age : "+p.age);
-				System.out.println("Gender : " + p.gender);
+					System.out.println("Booking ID :"+p.bookingID);
+					System.out.println("Passenger Name :"+p.passengerName);
+					System.out.println("Age : "+p.age);
+					System.out.println("Gender : " + p.gender);
 				}
 			}
 			System.out.println("Source : "+Source);
