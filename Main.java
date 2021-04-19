@@ -11,6 +11,7 @@ public class Main {
 		
 		int choice;
 		int ch;
+		int trying=0;
 		
 		do {
 			System.out.println("Select your role");
@@ -20,19 +21,22 @@ public class Main {
 			choice=sc.nextInt();
 			sc.nextLine();
 			switch(choice) {
-			case 1: do{
-				System.out.println("Enter the security key");
-			
-					
+			case 1:System.out.println("Enter the security key");
+					//sc.nextLine();
 				    securityKey=sc.nextLine();
-				    if(securityKey.equals(a.securityKey)) {
+				    if(securityKey.equals("admin123")) {
 				    System.out.println("Welcome, Admin!");
 					a.displayAdminMenu();
 				    }else {
 				    	System.out.println("Enter correct security key to access admin");
+				    	System.out.printf("Do you want to keep trying?\n1.Yes\n2.Exit");
+				    	trying = sc.nextInt();
+				    	sc.nextLine();
 				    }
-			}while(!securityKey.equals(a.securityKey));
+			}while(!securityKey.equals("admin123") && trying==1);
+			
 					break;
+
 			case 2: 
 					System.out.println("Do you want to create new account or login into your existing account");
 					System.out.println("1.Create Account");
