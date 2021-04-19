@@ -12,6 +12,7 @@ public class User {
 	Scanner sc = new Scanner(System.in);
 	public void displayAvailableTrains(String source, String destination, String date) {
 		int flag=0;
+		int ch;
 		Train t1 = null;
 		for(Train t: Admin.trainList) {
 			if((t.Source).equals(source)&&(t.Destination).equals(destination)&&(t.date).equals(date)) {
@@ -44,6 +45,9 @@ public class User {
 			}
 		}
 		if(flag==1) {
+			System.out.printf("Do you want to continue booking?\n1.Yes\n2.Exit ");
+			ch = sc.nextInt();
+			if(ch==1){
 			System.out.println("\nEnter train number which you want to book:");
 			int n = sc.nextInt(); sc.nextLine();
 			int i=0;
@@ -123,6 +127,7 @@ public class User {
 			else {
 				System.out.println("\nSorry for the incovenience.");
 			}
+		}
 		}
 		else if(flag==0) {
 			System.out.println("\nNo trains available. :(");
