@@ -73,11 +73,11 @@ public class User {
 			}
 			else if(tickets<=wait+seats) {
 				if(seats==0) {
-					System.out.println("No confirm tickets in this train are available.All your "+tickets+" will be booked in waiting.\nDo you want to continue? (Y/n)");
+					System.out.println("No confirm tickets in this train are available.All your "+tickets+" tickets will be booked in waiting.\nDo you want to continue? (Y/n)");
 					choice=sc.nextLine();
 				}
 				else {
-					System.out.println("You will get "+seats+" tickets as confirmed and remaining "+(tickets-seats)+"will be added to waiting.\nDo you want to continue? (Y/n)");
+					System.out.println("You will get "+seats+" tickets as confirmed and remaining "+(tickets-seats)+" tickets will be added to waiting.\nDo you want to continue? (Y/n)");
 					choice=sc.nextLine();
 				}
 				toBook = choice.equals("Y")||choice.equals("y") ? true:false;
