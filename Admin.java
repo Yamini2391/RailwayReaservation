@@ -2,29 +2,31 @@
 package railwayReservation;
 import java.util.*;
 public class Admin {
-public static LinkedList<Train> trainList = new LinkedList<>();
-String securityKey="admin123";
+	public static LinkedList<Train> trainList = new LinkedList<>();
+	String securityKey = "admin123";
 
 	void displayAdminMenu() {
 		int choice = 0;
 		do {
-			System.out.println("1. Add  trains ");
-			System.out.println("2. Remove trains.");
-			System.out.println("3. Display all trains.");
-			System.out.println("4. Business analysis");//te functions nantar decide karu
-			System.out.println("5. Exit");
+			System.out.println("\n\t***Admin Menu***");
+			System.out.println("\t1. Add  trains ");
+			System.out.println("\t2. Remove trains.");
+			System.out.println("\t3. Display all trains.");
+			System.out.println("\t4. Business analysis");//te functions nantar decide karu
+			System.out.println("\t5. Exit");
 			Scanner s = new Scanner(System.in);
-			int status=0;
+			int status = 0;
 			do {
-				status=0;
+				status = 0;
 				try {
-					System.out.println("Enter your choice");
+					System.out.print("\n\tEnter your choice: ");
 					choice = s.nextInt(); //s.nextLine();
 				}catch(InputMismatchException e) {
-					System.out.println("Please enter correct choice. Your input does not match the choice.");
-					status=1;
+					System.out.println("\tThis choice is invalid.Enter a number between 1 to 5");
+					status = 1;
 					s.nextLine();
 				}
+				if(status==0) s.nextLine();
 			}while(status==1);
 			switch(choice) {
 			case 1: this.addTrains();
@@ -33,119 +35,101 @@ String securityKey="admin123";
 					break;
 			case 3: this.displayTrains();
 					break;
-			case 4: System.out.println("What do you want to analyze?");
+			case 4: System.out.println("\n\tWhat do you want to analyze?");
 					break;
-			case 5: System.out.println("Closing admin window....");
+			case 5: System.out.println("\n\tClosing admin window....");
 					break;
-			default: System.out.println("Invalid choice!");
-						break;
+			default: System.out.println("\n\tInvalid choice!");
+					break;
 			}
 		}while(choice!=5);
 	}
 	
 	public void addTrains() {
-		Scanner sc=new Scanner(System.in);
+		Scanner sc = new Scanner(System.in);
 		char choice;
-		Validation v=new Validation();
+		Validation v = new Validation();
 		do {
-		System.out.println("Enter the train number");	
-		int trainNo=sc.nextInt();
-		sc.nextLine();
-		System.out.println("Enter the name of the train");
-		String trainName=sc.nextLine();
+			System.out.print("\n\t\tEnter the train number: ");	
+			int trainNo=sc.nextInt();
+			sc.nextLine();
+			System.out.print("\n\t\tEnter the name of the train: ");
+			String trainName=sc.nextLine();
+			boolean isSrc=false; boolean isDest=false;
+			String source,destination;
+			do {
+				do {
+					System.out.print("\n\t\tEnter the source place of the train: ");
+					source=sc.nextLine();
+					isSrc=v.placeValidation(source);
+					if(!isSrc) {
+						System.out.println("\t\tThis place is invalid.");
+					}
+				}while(!isSrc);
+				do {
+					System.out.print("\n\t\tEnter the destination place of the train: ");
+					destination=sc.nextLine();
+					isDest=v.placeValidation(destination);
+					if(!isDest) {
+						System.out.println("\t\tThis place is invalid.");
+					}
+				}while(!isDest);
+				if(source.equalsIgnoreCase(destination)) {
+					System.out.println("\t\tSource and Destination cannot be same.Please enter correct source and destination");
+				}
+			}while(source.equalsIgnoreCase(destination));
+			boolean isValid=false; String date;//int status=0;
+			do {
+				System.out.print("\n\t\tEnter date of journey in dd/mm/yyyy format only: ");
+				date = sc.nextLine();
+				isValid=v.dateValidation(date);
+				if(!isValid) {
+					System.out.println("\t\tThe date format is invalid.");
+				}
 		
-		boolean isSrc=false; boolean isDest=false;
-		String source,destination;
-		do {
-		do {
-		System.out.println("Enter the source place of the train");
-		 source=sc.nextLine();
-		isSrc=v.placeValidation(source);
-		if(!isSrc) {
-			System.out.println("Please enter the correct source");
-		}
-		}while(!isSrc);
+			}while(!isValid);
 		
-		//boolean isDest=false;
-		do {
-		System.out.println("Enter the destination place of the train");
-		 destination=sc.nextLine();
-		isDest=v.placeValidation(destination);
-		if(!isDest) {
-			System.out.println("Please enter the correct destination");
-		}
-		}while(!isDest);
-		if(source.equalsIgnoreCase(destination)) {
-			System.out.println("Please enter correct source and destination");
-		}
-		}while(source.equalsIgnoreCase(destination));
+			boolean deptTime=false; String departure;
+			do {
+				System.out.print("\n\t\tEnter departure time in 24 hour format as hh:mm only: ");
+				departure = sc.nextLine();
+				deptTime=v.timeValidation(departure);
+				if(!deptTime) {
+					System.out.println("\t\tThe time format is invalid.");
+				}
+			}while(!deptTime);
 		
-		//Validation v=new Validation();
-		boolean isValid=false; String date;//int status=0;
-		do {
-		System.out.println("Enter date of journey in dd/mm/yyyy format only:");
-		 date = sc.nextLine();
-		isValid=v.dateValidation(date);
-		if(!isValid) {
-			System.out.println("The date format is invalid. Please enter the date in dd/mm/yyyy format only");
-		}
-		
-		}while(!isValid);
-		
-		/*System.out.println("Enter date of journey:");
-		String date = sc.nextLine();*/
-		
-		boolean deptTime=false; String departure;
-		do {
-		System.out.println("Enter departure time in 24 hour format only hh:mm ");
-		 departure = sc.nextLine();
-		deptTime=v.timeValidation(departure);
-		if(!deptTime) {
-			System.out.println("The time format is invalid. Enter it in correct format");
-		}
-		//sc.nextLine();
-		}while(!deptTime);
-		
-		
-		/*System.out.println("Enter arrival time:");
-		String arrival = sc.nextLine();*/
-		boolean arrTime=false; String arrival;
-		do {
-			System.out.println("Enter arrival time in 24 hour format only hh:mm ");
-			 arrival = sc.nextLine();
-			arrTime=v.timeValidation(arrival);
-			if(!arrTime) {
-				System.out.println("The time format is invalid. Enter it in correct format");
-			}
-			//sc.nextLine();
+			boolean arrTime=false; String arrival;
+			do {
+				System.out.print("\n\t\tEnter arrival time in 24 hour format as hh:mm only: ");
+				arrival = sc.nextLine();
+				arrTime=v.timeValidation(arrival);
+				if(!arrTime) {
+					System.out.println("\t\tThe time format is invalid.");
+				}
+				//sc.nextLine();
 			}while(!arrTime);
 		
 		
-		System.out.println("Enter the maximum capacity of the train");
-		int maxSeat=sc.nextInt();
-		System.out.println("Enter the maximum waiting list capacity of the train");
-		int maxWait=sc.nextInt(); sc.nextLine();
-		System.out.println("Is the train sleepercoach?:y/n");
-		String slp = sc.nextLine();
-		boolean sl = false;
-		if(slp.equals("y")||slp.equals("Y")) {
-			sl = true;
-		}
-		System.out.println("Is the train A/C?:y/n");
-		String ac = sc.nextLine();
-		boolean a = false;
-		if(ac.equals("y")||ac.equals("Y")) {
-			a = true;
-		}
-		System.out.println("Enter price of ticket:");
-		int price = sc.nextInt(); sc.nextLine();
-		Train t=new Train(trainNo,trainName,a,sl,date,source,destination,maxSeat,maxWait, departure, arrival,price);
-		trainList.add(t);
-		System.out.println("Train "+trainNo+" "+trainName+" added successfully");
-		
-		System.out.println("Do you want to continue adding trains?y/n");
-		choice=sc.next().charAt(0);
-		//sc.close();
+			System.out.print("\n\t\tEnter the maximum capacity of the train: ");
+			int maxSeat=sc.nextInt(); sc.nextLine();
+			System.out.print("\n\t\tEnter the maximum waiting list capacity of the train: ");
+			int maxWait=sc.nextInt(); sc.nextLine();
+			System.out.print("\n\t\tIs the train sleepercoach?(y/n): ");
+			String slp = sc.nextLine();
+			boolean sl = slp.equals("y")||slp.equals("Y") ? true:false;
+			System.out.print("\n\t\tIs the train A/C?(y/n): ");
+			String ac = sc.nextLine();
+			boolean a = ac.equals("y")||ac.equals("Y") ? true:false;
+			System.out.print("\n\t\tEnter price of ticket: ");
+			int price = sc.nextInt(); sc.nextLine();
+			Train t=new Train(trainNo,trainName,a,sl,date,source,destination,maxSeat,maxWait, departure, arrival,price);
+			trainList.add(t);
+			System.out.println("\n\t\tTrain "+trainNo+" "+trainName+" added successfully");
+			
+			System.out.print("\n\t\tDo you want to continue adding trains? (y/n): ");
+			choice=sc.next().charAt(0);sc.nextLine();
+			//sc.close();
 		
 		}while(choice=='y'||choice=='Y');
 	}
@@ -157,37 +141,38 @@ String securityKey="admin123";
 		String ch = "y";
 		do {
 			flag = 0;
-			System.out.println("Enter the train number which you want to remove:");
-			trainNo = scan.nextInt();
-			for(Train t1: trainList) {
+			System.out.print("\n\t\tEnter the train number which you want to remove: ");
+			trainNo = scan.nextInt(); scan.nextLine();
+			for(Train t1 : trainList) {
 				if(t1.trainNo==trainNo) {
 					trainList.remove(t1);
-					System.out.println("Train no. "+trainNo+" successfully removed.");
+					System.out.println("\n\t\tTrain no. "+trainNo+" successfully removed.");
 					flag=1;
 					break;
 				}
 			}
 			if(flag!=1) {
-				System.out.println("Train not found.");
+				System.out.println("\t\tTrain not found.");
 			}
-			System.out.println("Do you want to continue removing trains? y/n");
-			ch = scan.next();
+			System.out.print("\n\t\tDo you want to continue removing trains? (y/n): ");
+			ch = scan.nextLine();
 		}while(ch.equals("y")||ch.equals("Y"));
-		System.out.println("Successfully removed.");
+		//System.out.println("Successfully removed.");
 		//scan.close();
 	}
 	void displayTrains() {
 		if(trainList.size()==0) {
-			System.out.println("No trains are added yet. Please add the trains to check the availability.");
+			System.out.println("\n\t\tNo trains are added yet. Please add the trains to check the availability.");
 		}
 		else {
-			System.out.println(" ________________________________________________________________________________________________________________________");//85
-			System.out.println("|no.|        name        |   date   |     source    |  destination  |Arrival|departure|price|  ac  |sleeper|seats|waiting|");
-			System.out.println("|___|____________________|__________|_______________|_______________|_______|_________|_____|______|_______|_____|_______|");
+			System.out.println("\n\t\tFollowing are the details of all available trains:");
+			System.out.println("\t\t________________________________________________________________________________________________________________________");//85
+			System.out.println("\t\t|no.|        name        |   date   |     source    |  destination  |Arrival|departure|price|  ac  |sleeper|seats|waiting|");
+			System.out.println("\t\t|___|____________________|__________|_______________|_______________|_______|_________|_____|______|_______|_____|_______|");
 			for(Train t : trainList) {
-				System.out.format("|%3d|%20s|%10s|%15s|%15s|%7s|%9s|%5d|%6s|%7s|%5d|%7d|\n",t.trainNo,t.trainName,t.date,t.Source,t.Destination,t.arrivalTime,t.departureTime,t.price,t.ac,t.sleeperCoach,t.maxSeat,t.maxWait);
+				System.out.format("\t\t|%3d|%20s|%10s|%15s|%15s|%7s|%9s|%5d|%6s|%7s|%5d|%7d|\n",t.trainNo,t.trainName,t.date,t.Source,t.Destination,t.arrivalTime,t.departureTime,t.price,t.ac,t.sleeperCoach,t.maxSeat,t.maxWait);
 			}
-			System.out.println("|___|____________________|__________|_______________|_______________|_______|_________|_____|______|_______|_____|_______|");
+			System.out.println("\t\t|___|____________________|__________|_______________|_______________|_______|_________|_____|______|_______|_____|_______|");
 		}
 	}
 }

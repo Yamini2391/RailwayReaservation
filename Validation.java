@@ -8,13 +8,6 @@ public class Validation {
 	Matcher m=pattern.matcher(date);
 	boolean isValid=m.matches();
 	return isValid;
-	
-	
-	//String validity;
-	
-	//validity=m.matches()?  "valid" : "not valid" ;
-	//return validity;
-	//System.out.println("The date is " + validity);
 }
 	public boolean timeValidation(String time) {
 		String regexTime="^([0-1][0-9]|2[0-3]):([0-5][0-9])$";

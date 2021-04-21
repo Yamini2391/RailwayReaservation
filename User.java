@@ -17,146 +17,139 @@ public class User {
 		for(Train t: Admin.trainList) {
 			if((t.Source).equals(source)&&(t.Destination).equals(destination)&&(t.date).equals(date)) {
 				flag=1;
-				System.out.println("\nTrain no.: "+t.trainNo);
-				System.out.println("Train name: "+t.trainName);
-				System.out.print("From: "+t.Source);
+				System.out.println("\n\t\tTrain no.: "+t.trainNo);
+				System.out.println("\t\tTrain name: "+t.trainName);
+				System.out.print("\t\tFrom: "+t.Source);
 				System.out.println("    Departure time: "+t.departureTime);
-				System.out.print("To: "+t.Destination);
+				System.out.print("\t\tTo: "+t.Destination);
 				System.out.println("    Arrival time: "+t.arrivalTime);
-				System.out.println("Date of journey: "+t.date);
-				System.out.println("Ticket price: "+t.price);
+				System.out.println("\t\tDate of journey: "+t.date);
+				System.out.println("\t\tTicket price: "+t.price);
 				if(t.ac){
-					System.out.println("A/C");
+					System.out.println("\t\tA/C");
 				}
 				if(t.sleeperCoach) {
-					System.out.println("Sleepercoach");
+					System.out.println("\t\tSleepercoach");
 				}
-				System.out.print("Number of available seats: ");
+				System.out.print("\t\tNumber of available seats: ");
 				System.out.println(t.maxSeat-(t.seatedPassengers).size());
-				System.out.print("Waitings available: ");
+				System.out.print("\t\tWaitings available: ");
 				System.out.println(t.maxWait-(t.waiting).size());
 				System.out.println();
 				t1 = t;
-				//break;
-				/*if(t.maxWait==(t.waiting).size()) {
-					flag=2;
-					System.out.println("Reservation full. Waiting full.");
-				}*/
 			}
 		}
 		if(flag==1) {
-			System.out.printf("Do you want to continue booking?\n1.Yes\n2.Exit ");
-			ch = sc.nextInt();
+			System.out.println("\n\t\tDo you want to continue booking?\n\t\t1.Yes\n\t\t2.Exit ");
+			System.out.print("\t\tEnter your choice: ");
+			ch = sc.nextInt(); sc.nextLine();
 			if(ch==1){
-			System.out.println("\nEnter train number which you want to book:");
-			int n = sc.nextInt(); sc.nextLine();
-			int i=0;
-			for(i=0;i<(Admin.trainList).size();i++) {
-				if(Admin.trainList.get(i).trainNo==n) {
-					break;
+				System.out.print("\n\t\tEnter train number which you want to book: ");
+				int n = sc.nextInt(); sc.nextLine();
+				int i=0;
+				for(i=0;i<(Admin.trainList).size();i++) {
+					if(Admin.trainList.get(i).trainNo==n) {
+						break;
+					}
 				}
-			}
-			if(i==(Admin.trainList).size()) {
-				System.out.println("Invalid train number. Try again.");
-				return;
-			}
-			if(Admin.trainList.get(i).maxSeat-(Admin.trainList.get(i).seatedPassengers).size()==0 && Admin.trainList.get(i).maxWait-(Admin.trainList.get(i).waiting).size()==0) {
-				System.out.println("\nThis train does not have any seats available.");
-				System.out.println("Sorry for the incovenience.");
-				return;
-			}
-			System.out.println("\nEnter Number of tickets you want to book: ");
-			int tickets = sc.nextInt();sc.nextLine();
-			boolean toBook = false;
-			int seats = Admin.trainList.get(i).maxSeat-(Admin.trainList.get(i).seatedPassengers).size();
-			int wait = Admin.trainList.get(i).maxWait-(Admin.trainList.get(i).waiting).size();
-			String choice =null;
-			if(tickets<=seats) {
-				System.out.println("Tickets for "+tickets+" passengers are available.");
-				toBook=true;
-			}
-			else if(tickets<=wait+seats) {
-				if(seats==0) {
-					System.out.println("No confirm tickets in this train are available.All your "+tickets+" tickets will be booked in waiting.\nDo you want to continue? (Y/n)");
-					choice=sc.nextLine();
+				if(i==(Admin.trainList).size()) {
+					System.out.println("\t\tInvalid train number. Try again.");
+					return;
+				}
+				if(Admin.trainList.get(i).maxSeat-(Admin.trainList.get(i).seatedPassengers).size()==0 && Admin.trainList.get(i).maxWait-(Admin.trainList.get(i).waiting).size()==0) {
+					System.out.println("\n\t\tThis train does not have any seats available.");
+					System.out.println("\t\tSorry for the incovenience.");
+					return;
+				}
+				System.out.print("\n\t\tEnter Number of tickets you want to book: ");
+				int tickets = sc.nextInt();sc.nextLine();
+				boolean toBook = false;
+				int seats = Admin.trainList.get(i).maxSeat-(Admin.trainList.get(i).seatedPassengers).size();
+				int wait = Admin.trainList.get(i).maxWait-(Admin.trainList.get(i).waiting).size();
+				String choice =null;
+				if(tickets<=seats) {
+					System.out.println("\n\t\tTickets for "+tickets+" passengers are available.");
+					toBook=true;
+				}
+				else if(tickets<=wait+seats) {
+					if(seats==0) {
+						System.out.print("\n\t\tNo confirm tickets in this train are available.All your "+tickets+" tickets will be booked in waiting.\n\t\tDo you want to continue? (Y/n): ");
+						choice=sc.nextLine();
+					}
+					else {
+						System.out.print("\n\t\tYou will get "+seats+" tickets as confirmed and remaining "+(tickets-seats)+" tickets will be added to waiting.\n\t\tDo you want to continue? (Y/n): ");
+						choice=sc.nextLine();
+					}
+					toBook = choice.equals("Y")||choice.equals("y") ? true:false;
+				}
+				else { //tickets>wait+seats;
+					System.out.println("\n\t\tThis train does not have "+tickets+" tickets available.");
+					if(seats==0) {
+						System.out.print("\t\tYou will get only "+wait+" tickets in waiting.\n\t\tDo you want to continue? (Y/n): ");
+						choice = sc.nextLine();
+					}
+					else {
+						System.out.print("\t\tYou will get "+seats+" tickets as confirmed and "+wait+" tickets in waiting.\n\t\tDo you want to continue? (Y/n): ");
+						choice = sc.nextLine();
+					}
+					toBook = choice.equals("Y")||choice.equals("y") ? true:false;
+					tickets=wait+seats;
+				}
+				if(toBook) {
+					List<Passenger> yourList = new LinkedList<>();
+					System.out.println("\n\t\tPlease enter passenger details respectively:");
+					for(int t=0;t<tickets;t++) {
+						System.out.println("\n\t\tPassenger #"+(t+1));
+						System.out.print("\n\t\tName of passenger: ");
+						String name = sc.nextLine();
+						System.out.print("\n\t\tGender: ");
+						String gender = sc.nextLine();
+						System.out.print("\n\t\tAge: ");
+						int age = sc.nextInt(); sc.nextLine();
+						yourList.add(new Passenger(name,age,gender,0));
+					}
+					System.out.println("\n\t\tYour ticket details are as follows:");
+					int t=1;
+					for(Passenger p : yourList) {
+						System.out.println("\n\t\tPassenger #"+t);
+						Admin.trainList.get(i).bookTicket(p.passengerName, p.gender, p.age);
+						int id = Train.bookingCount;
+						Booking b = new Booking(n, id);
+						bookingList.add(b);
+						t++;
+					}
+					
 				}
 				else {
-					System.out.println("You will get "+seats+" tickets as confirmed and remaining "+(tickets-seats)+" tickets will be added to waiting.\nDo you want to continue? (Y/n)");
-					choice=sc.nextLine();
+					System.out.println("\n\t\tSorry for the incovenience.");
 				}
-				toBook = choice.equals("Y")||choice.equals("y") ? true:false;
 			}
-			else { //tickets>wait+seats;
-				System.out.println("This train does not have "+tickets+" tickets available.");
-				if(seats==0) {
-					System.out.println("You will get only "+wait+" tickets in waiting.\nDo you want to continue? (Y/n)");
-					choice = sc.nextLine();
-				}
-				else {
-					System.out.println("You will get "+seats+" tickets as confirmed and "+wait+" tickets in waiting.\nDo you want to continue? (Y/n)");
-					choice = sc.nextLine();
-				}
-				toBook = choice.equals("Y")||choice.equals("y") ? true:false;
-				tickets=wait+seats;
-			}
-			if(toBook) {
-				List<Passenger> yourList = new LinkedList<>();
-				System.out.println("\nPlease enter passenger details respectively:");
-				for(int t=0;t<tickets;t++) {
-					System.out.println("\nPassenger #"+(t+1));
-					System.out.println("Name of passenger:");
-					String name = sc.nextLine();
-					System.out.println("Gender:");
-					String gender = sc.nextLine();
-					System.out.println("Age:");
-					int age = sc.nextInt(); sc.nextLine();
-					yourList.add(new Passenger(name,age,gender,0));
-				}
-				System.out.println("\nYour ticket details are as follows:");
-				int t=1;
-				for(Passenger p : yourList) {
-					System.out.println("\nPassenger #"+t);
-					Admin.trainList.get(i).bookTicket(p.passengerName, p.gender, p.age);
-					int id = Train.bookingCount;
-					Booking b = new Booking(n, id);
-					bookingList.add(b);
-					t++;
-				}
-				
-			}
-			else {
-				System.out.println("\nSorry for the incovenience.");
-			}
-		}
 		}
 		else if(flag==0) {
-			System.out.println("\nNo trains available. :(");
+			System.out.println("\n\t\tNo trains available. :(");
 		}
 	}
 	public void userBook() {
-		sc.nextLine();
-		System.out.println("\nEnter source:");
+		//sc.nextLine();
+		System.out.print("\n\t\tEnter source: ");
 		String source = sc.nextLine();
-		System.out.println("Enter destination:");
+		System.out.print("\n\t\tEnter destination: ");
 		String destination = sc.nextLine();
-		/*System.out.println("Enter date of journey in dd/mm/yyyy format only:");
-		String date = sc.nextLine();*/
 		Validation v=new Validation();
 		boolean isValid=false; String date;//int status=0;
 		do {
-		System.out.println("Enter date of journey in dd/mm/yyyy format only:");
-		 date = sc.nextLine();
-		isValid=v.dateValidation(date);
-		if(!isValid) {
-			System.out.println("The date format is invalid. Please enter the date in dd/mm/yyyy format only");
-		}
-		
+		System.out.print("\n\t\tEnter date of journey in dd/mm/yyyy format only: ");
+			date = sc.nextLine();
+			isValid=v.dateValidation(date);
+			if(!isValid) {
+				System.out.println("\t\tThe date format is invalid.");
+			}
 		}while(!isValid);
 		
 		displayAvailableTrains(source, destination, date);
 	}
 	public void userCancel() {
-		System.out.println("\nEnter your booking ID");
+		System.out.print("\n\t\tEnter your booking ID: ");
 		int id = sc.nextInt();sc.nextLine();
 		int trainNo = 0;
 		for(Booking b : bookingList) {
@@ -167,7 +160,7 @@ public class User {
 			}
 		}
 		if(trainNo==0) {
-			System.out.println("\nNo such booking found");
+			System.out.println("\n\t\tNo such booking found");
 		}
 		for(Train t : Admin.trainList) {
 			if(t.trainNo==trainNo) {
@@ -178,7 +171,7 @@ public class User {
 	}
 	
 	public void userStatus() {
-		System.out.println("\nEnter your booking ID");
+		System.out.print("\n\t\tEnter your booking ID: ");
 		int id = sc.nextInt();sc.nextLine();
 		int trainNo = 0;
 		for(Booking b : bookingList) {
@@ -188,7 +181,7 @@ public class User {
 			}
 		}
 		if(trainNo==0) {
-			System.out.println("\nNo such booking found. Please enter a valid booking ID.");
+			System.out.println("\n\t\tNo such booking found.");
 		}
 		for(Train t : Admin.trainList) {
 			if(t.trainNo==trainNo) {
@@ -200,26 +193,25 @@ public class User {
 	
 	public void userMenu() {
 		int choice=0;
+		System.out.println("\n\t\tWelcome to your account");
 		do {
-			System.out.println("\nWelcome to your account");
-			System.out.println("****MENU****");
-			System.out.println("1.Book train ticket");
-			System.out.println("2.Cancel train ticket");
-			System.out.println("3.Display status of ticket");
-			System.out.println("4.Exit");
-			/*System.out.println("Enter your choice");
-			choice=sc.nextInt(); sc.nextLine();*/
+			System.out.println("\n\t\t****MENU****");
+			System.out.println("\t\t1.Book train ticket");
+			System.out.println("\t\t2.Cancel train ticket");
+			System.out.println("\t\t3.Display status of ticket");
+			System.out.println("\t\t4.Exit");
 			int status=0;
 			do {
 				status=0;
 				try {
-					System.out.println("Enter your choice");
+					System.out.print("\n\t\tEnter your choice: ");
 					choice = sc.nextInt(); //sc.nextLine();
 				}catch(InputMismatchException e) {
-					System.out.println("Please enter correct choice. Your input does not match the choice.");
+					System.out.println("\t\tThis choice is invalid. Please Enter number between 1 to 4.");
 					status=1;
 					sc.nextLine();
 				}
+				if(status==0) sc.nextLine();
 			}while(status==1);
 			switch(choice) {
 			case 1:
@@ -232,10 +224,10 @@ public class User {
 				userStatus();
 				break;
 			case 4:
-				System.out.println("Thank you for using our services!!");
+				System.out.println("\n\t\tThank you for using our services!!");
 				break;
 			default:
-				System.out.println("Invalid Choice. Please try again");
+				System.out.println("\n\t\tInvalid Choice. Please try again");
 			}
 		}while(choice!=4);
 	}
