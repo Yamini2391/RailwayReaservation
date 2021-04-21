@@ -134,6 +134,7 @@ public class User {
 		}
 	}
 	public void userBook() {
+		sc.nextLine();
 		System.out.println("\nEnter source:");
 		String source = sc.nextLine();
 		System.out.println("Enter destination:");
@@ -198,7 +199,7 @@ public class User {
 	}
 	
 	public void userMenu() {
-		int choice;
+		int choice=0;
 		do {
 			System.out.println("\nWelcome to your account");
 			System.out.println("****MENU****");
@@ -206,8 +207,20 @@ public class User {
 			System.out.println("2.Cancel train ticket");
 			System.out.println("3.Display status of ticket");
 			System.out.println("4.Exit");
-			System.out.println("Enter your choice");
-			choice=sc.nextInt(); sc.nextLine();
+			/*System.out.println("Enter your choice");
+			choice=sc.nextInt(); sc.nextLine();*/
+			int status=0;
+			do {
+				status=0;
+				try {
+					System.out.println("Enter your choice");
+					choice = sc.nextInt(); //sc.nextLine();
+				}catch(InputMismatchException e) {
+					System.out.println("Please enter correct choice. Your input does not match the choice.");
+					status=1;
+					sc.nextLine();
+				}
+			}while(status==1);
 			switch(choice) {
 			case 1:
 				userBook();

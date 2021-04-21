@@ -14,8 +14,18 @@ String securityKey="admin123";
 			System.out.println("4. Business analysis");//te functions nantar decide karu
 			System.out.println("5. Exit");
 			Scanner s = new Scanner(System.in);
-			System.out.println("Enter your choice");
-			choice = s.nextInt(); s.nextLine();
+			int status=0;
+			do {
+				status=0;
+				try {
+					System.out.println("Enter your choice");
+					choice = s.nextInt(); //s.nextLine();
+				}catch(InputMismatchException e) {
+					System.out.println("Please enter correct choice. Your input does not match the choice.");
+					status=1;
+					s.nextLine();
+				}
+			}while(status==1);
 			switch(choice) {
 			case 1: this.addTrains();
 					break;
@@ -91,8 +101,9 @@ String securityKey="admin123";
 		 departure = sc.nextLine();
 		deptTime=v.timeValidation(departure);
 		if(!deptTime) {
-			System.out.println("The time format is inavalid. Enter it in correct format");
+			System.out.println("The time format is invalid. Enter it in correct format");
 		}
+		//sc.nextLine();
 		}while(!deptTime);
 		
 		
@@ -100,12 +111,13 @@ String securityKey="admin123";
 		String arrival = sc.nextLine();*/
 		boolean arrTime=false; String arrival;
 		do {
-			System.out.println("Enter departure time in 24 hour format only hh:mm ");
+			System.out.println("Enter arrival time in 24 hour format only hh:mm ");
 			 arrival = sc.nextLine();
 			arrTime=v.timeValidation(arrival);
 			if(!arrTime) {
-				System.out.println("The time format is inavalid. Enter it in correct format");
+				System.out.println("The time format is invalid. Enter it in correct format");
 			}
+			//sc.nextLine();
 			}while(!arrTime);
 		
 		
