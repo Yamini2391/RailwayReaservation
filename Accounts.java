@@ -1,3 +1,4 @@
+
 package railwayReservation;
 import java.util.*;
 
@@ -20,14 +21,18 @@ public class Accounts {
 				flag=1;
 				break;
 			}
+		}
 		if(flag==0){
 		System.out.println("Enter the password to secure your account");
 		String password = sc.nextLine();
-		User u = new User(userName,password);
-		userList.add(u);
-		u.userMenu();
+		User u1 = new User(userName,password);
+		
+		userList.add(u1);
+		u1.userMenu();
 		}
+		
 		}while(flag==1);
+		
 	}
 
 	public void login() {

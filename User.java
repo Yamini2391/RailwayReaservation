@@ -138,8 +138,20 @@ public class User {
 		String source = sc.nextLine();
 		System.out.println("Enter destination:");
 		String destination = sc.nextLine();
-		System.out.println("Enter date of journey:");
-		String date = sc.nextLine();
+		/*System.out.println("Enter date of journey in dd/mm/yyyy format only:");
+		String date = sc.nextLine();*/
+		Validation v=new Validation();
+		boolean isValid=false; String date;//int status=0;
+		do {
+		System.out.println("Enter date of journey in dd/mm/yyyy format only:");
+		 date = sc.nextLine();
+		isValid=v.dateValidation(date);
+		if(!isValid) {
+			System.out.println("The date format is invalid. Please enter the date in dd/mm/yyyy format only");
+		}
+		
+		}while(!isValid);
+		
 		displayAvailableTrains(source, destination, date);
 	}
 	public void userCancel() {

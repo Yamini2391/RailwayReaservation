@@ -21,7 +21,9 @@ public class Main {
 			choice=sc.nextInt();
 			sc.nextLine();
 			switch(choice) {
-			case 1:System.out.println("Enter the security key");
+			
+			case 1: do {
+					System.out.println("Enter the security key");
 					//sc.nextLine();
 				    securityKey=sc.nextLine();
 				    if(securityKey.equals("admin123")) {
@@ -37,8 +39,7 @@ public class Main {
 			
 					break;
 
-			case 2: 
-					System.out.println("Do you want to create new account or login into your existing account");
+			case 2: System.out.println("Do you want to create new account or login into your existing account");
 					System.out.println("1.Create Account");
 					System.out.println("2.Login");
 					System.out.println("3.Exit");

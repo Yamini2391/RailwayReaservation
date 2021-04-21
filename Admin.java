@@ -1,3 +1,4 @@
+
 package railwayReservation;
 import java.util.*;
 public class Admin {
@@ -35,22 +36,79 @@ String securityKey="admin123";
 	public void addTrains() {
 		Scanner sc=new Scanner(System.in);
 		char choice;
+		Validation v=new Validation();
 		do {
 		System.out.println("Enter the train number");	
 		int trainNo=sc.nextInt();
 		sc.nextLine();
 		System.out.println("Enter the name of the train");
 		String trainName=sc.nextLine();
+		
+		boolean isSrc=false; boolean isDest=false;
+		String source,destination;
+		do {
+		do {
 		System.out.println("Enter the source place of the train");
-		String source=sc.nextLine();
+		 source=sc.nextLine();
+		isSrc=v.placeValidation(source);
+		if(!isSrc) {
+			System.out.println("Please enter the correct source");
+		}
+		}while(!isSrc);
+		
+		//boolean isDest=false;
+		do {
 		System.out.println("Enter the destination place of the train");
-		String destination=sc.nextLine();
-		System.out.println("Enter date of journey:");
-		String date = sc.nextLine();
-		System.out.println("Enter departure time:");
-		String departure = sc.nextLine();
-		System.out.println("Enter arrival time:");
-		String arrival = sc.nextLine();
+		 destination=sc.nextLine();
+		isDest=v.placeValidation(destination);
+		if(!isDest) {
+			System.out.println("Please enter the correct destination");
+		}
+		}while(!isDest);
+		if(source.equalsIgnoreCase(destination)) {
+			System.out.println("Please enter correct source and destination");
+		}
+		}while(source.equalsIgnoreCase(destination));
+		
+		//Validation v=new Validation();
+		boolean isValid=false; String date;//int status=0;
+		do {
+		System.out.println("Enter date of journey in dd/mm/yyyy format only:");
+		 date = sc.nextLine();
+		isValid=v.dateValidation(date);
+		if(!isValid) {
+			System.out.println("The date format is invalid. Please enter the date in dd/mm/yyyy format only");
+		}
+		
+		}while(!isValid);
+		
+		/*System.out.println("Enter date of journey:");
+		String date = sc.nextLine();*/
+		
+		boolean deptTime=false; String departure;
+		do {
+		System.out.println("Enter departure time in 24 hour format only hh:mm ");
+		 departure = sc.nextLine();
+		deptTime=v.timeValidation(departure);
+		if(!deptTime) {
+			System.out.println("The time format is inavalid. Enter it in correct format");
+		}
+		}while(!deptTime);
+		
+		
+		/*System.out.println("Enter arrival time:");
+		String arrival = sc.nextLine();*/
+		boolean arrTime=false; String arrival;
+		do {
+			System.out.println("Enter departure time in 24 hour format only hh:mm ");
+			 arrival = sc.nextLine();
+			arrTime=v.timeValidation(arrival);
+			if(!arrTime) {
+				System.out.println("The time format is inavalid. Enter it in correct format");
+			}
+			}while(!arrTime);
+		
+		
 		System.out.println("Enter the maximum capacity of the train");
 		int maxSeat=sc.nextInt();
 		System.out.println("Enter the maximum waiting list capacity of the train");
