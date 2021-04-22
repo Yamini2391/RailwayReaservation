@@ -166,13 +166,15 @@ public class Admin {
 		}
 		else {
 			System.out.println("\n\t\tFollowing are the details of all available trains:");
-			System.out.println("\t\t________________________________________________________________________________________________________________________");//85
-			System.out.println("\t\t|no.|        name        |   date   |     source    |  destination  |Arrival|departure|price|  ac  |sleeper|seats|waiting|");
-			System.out.println("\t\t|___|____________________|__________|_______________|_______________|_______|_________|_____|______|_______|_____|_______|");
+			System.out.println("\t\t_________________________________________________________________________________________________________________________");//85
+			System.out.println("\t\t|no.|        name        |   date   |     source    |  destination  |departure|Arrival|price|  ac  |sleeper|seats|waiting|");
+			System.out.println("\t\t|___|____________________|__________|_______________|_______________|_________|_______|_____|______|_______|_____|_______|");
 			for(Train t : trainList) {
-				System.out.format("\t\t|%3d|%20s|%10s|%15s|%15s|%7s|%9s|%5d|%6s|%7s|%5d|%7d|\n",t.trainNo,t.trainName,t.date,t.Source,t.Destination,t.arrivalTime,t.departureTime,t.price,t.ac,t.sleeperCoach,t.maxSeat,t.maxWait);
+				String a = t.ac ? "Yes":"No";
+				String sleep = t.sleeperCoach ? "Yes":"No";
+				System.out.format("\t\t|%3d|%20s|%10s|%15s|%15s|%9s|%7s|%5d|%6s|%7s|%5d|%7d|\n",t.trainNo,t.trainName,t.date,t.Source,t.Destination,t.departureTime,t.arrivalTime,t.price,a,sleep,t.maxSeat,t.maxWait);
 			}
-			System.out.println("\t\t|___|____________________|__________|_______________|_______________|_______|_________|_____|______|_______|_____|_______|");
+			System.out.println("\t\t|___|____________________|__________|_______________|_______________|_________|_______|_____|______|_______|_____|_______|");
 		}
 	}
 }
