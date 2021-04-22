@@ -15,7 +15,7 @@ public class User {
 		int ch;
 		//Train t1 = null;
 		for(Train t: Admin.trainList) {
-			if((t.Source).equals(source)&&(t.Destination).equals(destination)&&(t.date).equals(date)) {
+			if((t.Source).equalsIgnoreCase(source)&&(t.Destination).equalsIgnoreCase(destination)&&(t.date).equalsIgnoreCase(date)) {
 				if(flag==0) {
 					System.out.println("\n\t\tFollowing are the details of all available trains:");
 					System.out.println("\t\t_________________________________________________________________________________________________________________________");//85
@@ -193,12 +193,15 @@ public class User {
 		if(trainNo==0) {
 			System.out.println("\n\t\tNo such booking found.");
 		}
-		for(Train t : Admin.trainList) {
-			if(t.trainNo==trainNo) {
-				t.displayStatus(id);
+		Train t =null;
+		for(Train t1 : Admin.trainList) {
+			if(t1.trainNo==trainNo) {
+				t=t1;
+				t1.displayStatus(id);
 				break;
 			}
 		}
+		if(t==null) System.out.println("\n\t\tOops! This train is cancelled.");
 	}
 	
 	public void userMenu() {
