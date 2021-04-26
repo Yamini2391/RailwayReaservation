@@ -164,50 +164,33 @@ public class User {
 		int trainNo = 0;
 		int flag=0;
 		Booking b1=null;
-		
-			for(Booking b : bookingList) {
-				if(b.bookingID==id) {
-					trainNo=b.trainNo;
-					b1=b;
-					//bookingList.remove(b);
-					break;
-				}
-			}
-			for(Train t2: Admin.removedTrains) {
-				if(t2.trainNo==trainNo) {
-					System.out.println("\n\t\tOops! This train is cancelled. You will receive 100% refund within 5 days.");
-					flag=1;
-					break;
-				}
-			}
-			if(flag==0 && trainNo!=0) {
-				bookingList.remove(b1);
-				for(Train t : Admin.trainList) {
-					if(t.trainNo==trainNo) {
-						t.cancel(id);
-						break;
-					}
-				}
-
-			}
-			if(trainNo==0) {
-				System.out.println("\n\t\tNo such booking found");
-			}
 		for(Booking b : bookingList) {
 			if(b.bookingID==id) {
 				trainNo=b.trainNo;
-				bookingList.remove(b);
+				b1=b;
+				//bookingList.remove(b);
 				break;
 			}
+		}
+		for(Train t2: Admin.removedTrains) {
+			if(t2.trainNo==trainNo) {
+				System.out.println("\n\t\tOops! This train is cancelled. You will receive Rs."+t2.price+" refund within 5 days.");
+				flag=1;
+				break;
+			}
+		}
+		if(flag==0 && trainNo!=0) {
+			bookingList.remove(b1);
+			for(Train t : Admin.trainList) {
+				if(t.trainNo==trainNo) {
+					t.cancel(id);
+					break;
+				}
+			}
+
 		}
 		if(trainNo==0) {
 			System.out.println("\n\t\tNo such booking found");
-		}
-		for(Train t : Admin.trainList) {
-			if(t.trainNo==trainNo) {
-				t.cancel(id);
-				break;
-			}
 		}
 	}
 	
@@ -226,8 +209,9 @@ public class User {
 		}
 		for(Train t2: Admin.removedTrains) {
 			if(t2.trainNo==trainNo) {
-				System.out.println("\n\t\tOops! This train is cancelled. You will receive 100% refund within 5 days.");
-				break;
+				System.out.println("\n\t\tOops! This train is cancelled. You will receive refund of Rs."+t2.price+" within 5 days.");
+				//break;
+				return;
 			}
 		}
 		//Train t =null;
