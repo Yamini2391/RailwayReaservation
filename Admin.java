@@ -1,8 +1,8 @@
-
 package railwayReservation;
 import java.util.*;
 public class Admin {
 	public static LinkedList<Train> trainList = new LinkedList<>();
+	public static LinkedList<Train> removedTrains = new LinkedList<>();
 	String securityKey = "admin123";
 
 	void displayAdminMenu() {
@@ -145,6 +145,7 @@ public class Admin {
 			trainNo = scan.nextInt(); scan.nextLine();
 			for(Train t1 : trainList) {
 				if(t1.trainNo==trainNo) {
+					removedTrains.add(t1);
 					trainList.remove(t1);
 					System.out.println("\n\t\tTrain no. "+trainNo+" successfully removed.");
 					flag=1;

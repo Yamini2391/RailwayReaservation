@@ -100,6 +100,10 @@ public class Train {
 		void displayStatus(int bookingID) {
 			int i=0;
 			int flag = 0;
+			if(seatedPassengers.size()==0) {
+				System.out.println("Train cancelled");
+				return;
+			}
 			for(Passenger p : waiting) {
 				i++;
 				if(p.bookingID==bookingID) {
