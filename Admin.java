@@ -1,4 +1,4 @@
-package railwayReservation;
+package railways;
 import java.util.*;
 public class Admin {
 	public static LinkedList<Train> trainList = new LinkedList<>();
@@ -12,8 +12,8 @@ public class Admin {
 			System.out.println("\t1. Add  trains ");
 			System.out.println("\t2. Remove trains.");
 			System.out.println("\t3. Display all trains.");
-			System.out.println("\t4. Business analysis");//te functions nantar decide karu
-			System.out.println("\t5. Exit");
+			//System.out.println("\t4. Business analysis");//te functions nantar decide karu
+			System.out.println("\t4. Exit");
 			Scanner s = new Scanner(System.in);
 			int status = 0;
 			do {
@@ -22,7 +22,7 @@ public class Admin {
 					System.out.print("\n\tEnter your choice: ");
 					choice = s.nextInt(); //s.nextLine();
 				}catch(InputMismatchException e) {
-					System.out.println("\tThis choice is invalid.Enter a number between 1 to 5");
+					System.out.println("\tThis choice is invalid.Enter a number between 1 to 4");
 					status = 1;
 					s.nextLine();
 				}
@@ -35,14 +35,12 @@ public class Admin {
 					break;
 			case 3: this.displayTrains();
 					break;
-			case 4: System.out.println("\n\tWhat do you want to analyze?");
-					break;
-			case 5: System.out.println("\n\tClosing admin window....");
+			case 4: System.out.println("\n\tClosing admin window....");
 					break;
 			default: System.out.println("\n\tInvalid choice!");
 					break;
 			}
-		}while(choice!=5);
+		}while(choice!=4);
 	}
 	
 	public void addTrains() {

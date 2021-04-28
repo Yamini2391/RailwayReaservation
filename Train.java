@@ -1,4 +1,4 @@
-package railwayReservation;
+package railways;
 import java.util.*;
 import java.time.*;
 public class Train {

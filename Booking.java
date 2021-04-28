@@ -1,4 +1,4 @@
-package railwayReservation;
+package railways;
 
 public class Booking {
 	int trainNo;
@@ -8,3 +8,4 @@ public class Booking {
 		this.bookingID = bookingID;
 	}
 }
+

@@ -1,4 +1,4 @@
-package railwayReservation;
+package railways;
 import java.util.*;
 public class User {
 	double userID;

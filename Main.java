@@ -1,4 +1,4 @@
-package railwayReservation;
+package railways;
 import java.util.*;
 
 public class Main {
@@ -88,4 +88,5 @@ public class Main {
 		}while(choice!=3);
 	}
 }
+
 

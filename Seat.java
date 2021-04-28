@@ -1,4 +1,4 @@
-package railwayReservation;
+package railways;
 
 public class Seat extends Passenger{
 	int seatNo;

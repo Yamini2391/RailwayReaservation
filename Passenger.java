@@ -1,4 +1,4 @@
-package railwayReservation;
+package railways;
 
 public class Passenger {
 	String passengerName;

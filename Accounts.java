@@ -1,4 +1,4 @@
-package railwayReservation;
+package railways;
 import java.util.*;
 
 public class Accounts {
@@ -60,3 +60,4 @@ public class Accounts {
 		}while(flag==0 && trying==1);	
 	}
 }
+
