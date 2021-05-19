@@ -39,7 +39,7 @@ public class Train {
 			int currBookingID=0;
 			if(seatedPassengers.size()==maxSeat) {
 					currBookingID = ++bookingCount;
-					Passenger p1=new Passenger(name,age,gender,currBookingID);
+					Passenger p1=new Passenger(name,age,gender.toUpperCase(),currBookingID);
 					waiting.add(p1);
 					System.out.println("\n\t\tYou have been added to waiting list.");
 					displayTicket(currBookingID);	
@@ -55,7 +55,7 @@ public class Train {
 				}
 				seatNo = i+1;
 				seatList[i] = true;
-				Seat s1=new Seat(name, age, gender, currBookingID, seatNo, false);
+				Seat s1=new Seat(name, age, gender.toUpperCase(), currBookingID, seatNo, false);
 				seatedPassengers.add(s1);
 				System.out.println("\n\t\tBooking confirmed. Happy Journey!");
 				displayTicket(currBookingID);

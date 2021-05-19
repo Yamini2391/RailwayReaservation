@@ -14,6 +14,7 @@ public class User {
 		int flag=0;
 		int ch;
 		//Train t1 = null;
+		ArrayList<Integer> availableTrains = new ArrayList<Integer>();
 		for(Train t: Admin.trainList) {
 			if((t.Source).equalsIgnoreCase(source)&&(t.Destination).equalsIgnoreCase(destination)&&(t.date).equalsIgnoreCase(date)) {
 				if(flag==0) {
@@ -25,6 +26,7 @@ public class User {
 				flag=1;
 				String a = t.ac ? "Yes":"No";
 				String sleep = t.sleeperCoach ? "Yes":"No";
+				availableTrains.add(t.trainNo);
 				System.out.format("\t\t|%3d|%20s|%10s|%15s|%15s|%9s|%7s|%5d|%6s|%7s|%5d|%7d|\n",t.trainNo,t.trainName,t.date,t.Source,t.Destination,t.departureTime,t.arrivalTime,t.price,a,sleep,t.maxSeat-(t.seatedPassengers).size(),t.maxWait-(t.waiting).size());
 			}
 		}
@@ -36,15 +38,15 @@ public class User {
 			if(ch==1){
 				System.out.print("\n\t\tEnter train number which you want to book: ");
 				int n = sc.nextInt(); sc.nextLine();
+				if(!availableTrains.contains(n)) {
+					System.out.println("\n\t\tInvalid train number. Try again.");
+					return;
+				}
 				int i=0;
 				for(i=0;i<(Admin.trainList).size();i++) {
 					if(Admin.trainList.get(i).trainNo==n) {
 						break;
 					}
-				}
-				if(i==(Admin.trainList).size()) {
-					System.out.println("\t\tInvalid train number. Try again.");
-					return;
 				}
 				if(Admin.trainList.get(i).maxSeat-(Admin.trainList.get(i).seatedPassengers).size()==0 && Admin.trainList.get(i).maxWait-(Admin.trainList.get(i).waiting).size()==0) {
 					System.out.println("\n\t\tThis train does not have any seats available.");
