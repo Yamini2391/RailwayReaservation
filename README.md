@@ -32,6 +32,9 @@ Building a console-based programme to automate the manual RAILWAY RESERVATION SY
 3. Importance of static keyword (used a static variable to keep track of booking ID)
 4. Learned a new concept of Regular Expressions
 5. Learned a powerful tool - GitHub
+## WHAT'S NEXT:
+1. User interface for better user experience.
+2. Database for storing train and station data.
 
 
 
