@@ -19,30 +19,10 @@ public class User {
 				if(flag==0) {
 					System.out.println("\n\t\tFollowing are the details of all available trains:");
 					System.out.println("\t\t_________________________________________________________________________________________________________________________");//85
-					System.out.println("\t\t|no.|        name        |   date   |     source    |  destination  |departure|Arrival|price|  ac  |sleeper|seats|waiting|");
+					System.out.println("\t\t|NO.|        NAME        |   DATE   |     SOURCE    |  DESTINATION  |DEPARTURE|ARRIVAL|PRICE|  AC  |SLEEPER|SEATS|WAITING|");
 					System.out.println("\t\t|___|____________________|__________|_______________|_______________|_________|_______|_____|______|_______|_____|_______|");
 				}
 				flag=1;
-				/*System.out.println("\n\t\tTrain no.: "+t.trainNo);
-				System.out.println("\t\tTrain name: "+t.trainName);
-				System.out.print("\t\tFrom: "+t.Source);
-				System.out.println("    Departure time: "+t.departureTime);
-				System.out.print("\t\tTo: "+t.Destination);
-				System.out.println("    Arrival time: "+t.arrivalTime);
-				System.out.println("\t\tDate of journey: "+t.date);
-				System.out.println("\t\tTicket price: "+t.price);
-				if(t.ac){
-					System.out.println("\t\tA/C");
-				}
-				if(t.sleeperCoach) {
-					System.out.println("\t\tSleepercoach");
-				}
-				System.out.print("\t\tNumber of available seats: ");
-				System.out.println(t.maxSeat-(t.seatedPassengers).size());
-				System.out.print("\t\tWaitings available: ");
-				System.out.println(t.maxWait-(t.waiting).size());
-				System.out.println();*/
-				//t1 = t;
 				String a = t.ac ? "Yes":"No";
 				String sleep = t.sleeperCoach ? "Yes":"No";
 				System.out.format("\t\t|%3d|%20s|%10s|%15s|%15s|%9s|%7s|%5d|%6s|%7s|%5d|%7d|\n",t.trainNo,t.trainName,t.date,t.Source,t.Destination,t.departureTime,t.arrivalTime,t.price,a,sleep,t.maxSeat-(t.seatedPassengers).size(),t.maxWait-(t.waiting).size());
@@ -83,11 +63,13 @@ public class User {
 				}
 				else if(tickets<=wait+seats) {
 					if(seats==0) {
-						System.out.print("\n\t\tNo confirm tickets in this train are available.All your "+tickets+" tickets will be booked in waiting.\n\t\tDo you want to continue? (Y/n): ");
+						System.out.println("\n\t\tNo confirm tickets in this train are available.All your "+tickets+" tickets will be booked in waiting.");
+						System.out.print("\n\t\tDo you want to continue? (Y/N): ");
 						choice=sc.nextLine();
 					}
 					else {
-						System.out.print("\n\t\tYou will get "+seats+" tickets as confirmed and remaining "+(tickets-seats)+" tickets will be added to waiting.\n\t\tDo you want to continue? (Y/n): ");
+						System.out.println("\n\t\tYou will get "+seats+" tickets as confirmed and remaining "+(tickets-seats)+" tickets will be added to waiting.");
+						System.out.print("\n\t\tDo you want to continue? (Y/N): ");
 						choice=sc.nextLine();
 					}
 					toBook = choice.equals("Y")||choice.equals("y") ? true:false;
@@ -95,11 +77,13 @@ public class User {
 				else { //tickets>wait+seats;
 					System.out.println("\n\t\tThis train does not have "+tickets+" tickets available.");
 					if(seats==0) {
-						System.out.print("\t\tYou will get only "+wait+" tickets in waiting.\n\t\tDo you want to continue? (Y/n): ");
+						System.out.println("\t\tYou will get only "+wait+" tickets in waiting.");
+						System.out.print("\n\t\tDo you want to continue? (Y/N): ");
 						choice = sc.nextLine();
 					}
 					else {
-						System.out.print("\t\tYou will get "+seats+" tickets as confirmed and "+wait+" tickets in waiting.\n\t\tDo you want to continue? (Y/n): ");
+						System.out.print("\t\tYou will get "+seats+" tickets as confirmed and "+wait+" tickets in waiting.");
+						System.out.println("\n\t\tDo you want to continue? (Y/N): ");
 						choice = sc.nextLine();
 					}
 					toBook = choice.equals("Y")||choice.equals("y") ? true:false;
@@ -112,8 +96,14 @@ public class User {
 						System.out.println("\n\t\tPassenger #"+(t+1));
 						System.out.print("\n\t\tName of passenger: ");
 						String name = sc.nextLine();
-						System.out.print("\n\t\tGender: ");
-						String gender = sc.nextLine();
+						String gender;
+						do {
+							System.out.print("\n\t\tGender(M/F): ");
+							gender = sc.nextLine();
+							if(!gender.equalsIgnoreCase("M")&&!gender.equalsIgnoreCase("F")) {
+								System.out.println("\t\tInvalid Input!");								
+							}
+						}while(!gender.equalsIgnoreCase("M")&&!gender.equalsIgnoreCase("F"));
 						System.out.print("\n\t\tAge: ");
 						int age = sc.nextInt(); sc.nextLine();
 						yourList.add(new Passenger(name,age,gender,0));
@@ -232,16 +222,16 @@ public class User {
 		int choice=0;
 		System.out.println("\n\t\tWelcome to your account");
 		do {
-			System.out.println("\n\t\t****MENU****");
-			System.out.println("\t\t1.Book train ticket");
-			System.out.println("\t\t2.Cancel train ticket");
-			System.out.println("\t\t3.Display status of ticket");
-			System.out.println("\t\t4.Exit");
+			System.out.println("\n\t\t****MENU****\n");
+			System.out.println("\t\t1. Book ticket");
+			System.out.println("\t\t2. Cancel ticket");
+			System.out.println("\t\t3. Display status of ticket");
+			System.out.println("\t\t4. Exit");
 			int status=0;
 			do {
 				status=0;
 				try {
-					System.out.print("\n\t\tEnter your choice: ");
+					System.out.print("\t\tEnter your choice: ");
 					choice = sc.nextInt(); //sc.nextLine();
 				}catch(InputMismatchException e) {
 					System.out.println("\t\tThis choice is invalid. Please Enter number between 1 to 4.");

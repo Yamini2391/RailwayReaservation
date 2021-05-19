@@ -17,7 +17,7 @@ public class Validation {
 		return isValid;
 	}
 	public boolean placeValidation(String place) {
-		String regexPlace="^[a-zA-Z]+$";
+		String regexPlace="^[a-zA-Z ]+$";
 		Pattern pattern = Pattern.compile(regexPlace);
 		Matcher m=pattern.matcher(place);
 		boolean isValid=m.matches();

@@ -1,6 +1,5 @@
 package railways;
 import java.util.*;
-import java.time.*;
 public class Train {
 		int trainNo;
 		String trainName;
@@ -100,10 +99,6 @@ public class Train {
 		void displayStatus(int bookingID) {
 			int i=0;
 			int flag = 0;
-			/*if(seatedPassengers.size()==0) {
-				System.out.println("Train cancelled");
-				return;
-			}*/
 			for(Passenger p : waiting) {
 				i++;
 				if(p.bookingID==bookingID) {
@@ -119,32 +114,38 @@ public class Train {
 		}
 		
 		void displayTicket(int bookingID) {
-			//System.out.println("Your Ticket details are as follows:\n");
-			System.out.println("\n\t\tTrain No : "+trainNo);
-			System.out.println("\t\tTrain Name : "+trainName);
+			System.out.println("\n\t\t============================================");//44
+			System.out.format("\t\t||Train No          : %20d||\n",trainNo);
+			System.out.format("\t\t||Train Name        : %20s||\n",trainName);
+			boolean inSeated = false;
 			for(Seat s : seatedPassengers) {
 				if(s.bookingID==bookingID) {
-					System.out.println("\t\tBooking ID :"+s.bookingID);
-					System.out.println("\t\tSeat No. : "+s.seatNo);
-					System.out.println("\t\tPassenger Name :"+s.passengerName);
-					System.out.println("\t\tAge : "+s.age);
-					System.out.println("\t\tGender : " + s.gender);
+					inSeated = true;
+					System.out.format("\t\t||Booking ID        : %20d||\n",s.bookingID);
+					System.out.format("\t\t||Seat No.          : %20d||\n",s.seatNo);
+					System.out.format("\t\t||Passenger Name    : %20s||\n",s.passengerName);
+					System.out.format("\t\t||Age               : %20d||\n",s.age);
+					System.out.format("\t\t||Gender            : %20s||\n",s.gender);
+					break;
 				}
 			}
-			
-			for(Passenger p : waiting) {
-				if(p.bookingID==bookingID) {
-					System.out.println("\t\tBooking ID :"+p.bookingID);
-					System.out.println("\t\tPassenger Name :"+p.passengerName);
-					System.out.println("\t\tAge : "+p.age);
-					System.out.println("\t\tGender : " + p.gender);
+			if(!inSeated) {
+				for(Passenger p : waiting) {
+					if(p.bookingID==bookingID) {
+						System.out.format("\t\t||Booking ID        : %20d||\n",p.bookingID);
+						System.out.format("\t\t||Passenger Name    : %20s||\n",p.passengerName);
+						System.out.format("\t\t||Age               : %20d||\n",p.age);
+						System.out.format("\t\t||Gender            : %20s||\n",p.gender);	
+						break;
+					}
 				}
 			}
-			System.out.println("\t\tSource : "+Source);
-			System.out.println("\t\tDestination: "+Destination);
-			System.out.println("\t\tDate of journey: "+date);
-			System.out.println("\t\tArrival Time : "+arrivalTime);
-			System.out.println("\t\tDeparture Time : "+departureTime);
-			System.out.println("\t\tTicket price: "+price);
+			System.out.format("\t\t||Source            : %20s||\n",Source);
+			System.out.format("\t\t||Destination       : %20s||\n",Destination);
+			System.out.format("\t\t||Date of journey   : %20s||\n",date);
+			System.out.format("\t\t||Arrival Time      : %20s||\n",arrivalTime);
+			System.out.format("\t\t||Departure Time    : %20s||\n",departureTime);
+			System.out.format("\t\t||Ticket price      : %20s||\n",price);
+			System.out.println("\t\t============================================");
 		}
 }

@@ -23,7 +23,7 @@ public class Accounts {
 				String password = sc.nextLine();
 				User u1 = new User(userName,password);
 				userList.add(u1);
-				System.out.println("\n\tAccount created successfully");
+				System.out.println("\n\tAccount created successfully!!");
 				u1.userMenu();
 			}
 		
@@ -47,11 +47,11 @@ public class Accounts {
 				}
 			}
 			if(flag==1) {
-				System.out.println("\n\tLogin Successful");
+				System.out.println("\n\tLogin Successful!!");
 				u1.userMenu();
 			}
 			else {
-				System.out.println("\tPlease enter proper credentials");
+				System.out.println("\tPlease enter proper credentials.\n");
 				System.out.println("\tDo you want to keep trying?\n\t1.Yes\n\t2.Exit");
 				System.out.print("\n\tEnter your choice: ");
 		    	trying = sc.nextInt();
