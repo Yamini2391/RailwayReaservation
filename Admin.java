@@ -168,7 +168,7 @@ public class Admin {
 				System.out.println("\t\tTrain not found.");
 			}
 			do {
-				System.out.print("\n\t\tDo you want to continue adding trains? (y/n): ");
+				System.out.print("\n\t\tDo you want to continue removing trains? (y/n): ");
 				ch=scan.nextLine();
 				if(!ch.equalsIgnoreCase("Y")&&!ch.equalsIgnoreCase("N")) {
 					System.out.println("\t\tInvalid Choice!");
