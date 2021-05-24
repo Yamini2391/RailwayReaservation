@@ -4,7 +4,7 @@ import java.util.*;
 public class Main {
 	public static void main(String args[]) {
 		Scanner sc=new Scanner(System.in);
-		System.out.println("Welcome to Indian Railways!");
+		System.out.println("WELCOME TO CODEWAYS!!!");
 		Admin a=new Admin();
 		Accounts acc=new Accounts();
 		String securityKey;
