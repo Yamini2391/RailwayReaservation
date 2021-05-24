@@ -5,6 +5,7 @@ public class Main {
 	public static void main(String args[]) {
 		Scanner sc=new Scanner(System.in);
 		System.out.println("WELCOME TO CODEWAYS!!!");
+		System.out.println("Our trains run smoothly; so does our code!");
 		Admin a=new Admin();
 		Accounts acc=new Accounts();
 		String securityKey;
